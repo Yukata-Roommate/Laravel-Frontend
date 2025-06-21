@@ -1,0 +1,27 @@
+<x-yukata-rm::layout.pages :page-title="$pageTitle">
+    <x-slot name="usermenu">
+    </x-slot>
+
+    <x-slot name="sidebar">
+    </x-slot>
+
+    @isset($breadcrumb)
+        <x-slot name="breadcrumb">
+            {{ $breadcrumb }}
+        </x-slot>
+    @endisset
+
+    @isset($footer)
+        <x-slot name="footer">
+            {{ $footer }}
+        </x-slot>
+    @endisset
+
+    @isset($modal)
+        <x-slot name="modal">
+            {{ $modal }}
+        </x-slot>
+    @endisset
+
+    {{ $slot }}
+</x-yukata-rm::layout.pages>
