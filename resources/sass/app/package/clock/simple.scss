@@ -1,0 +1,91 @@
+/*****************************************
+ * Package Clock
+ *
+ * Simple
+ *****************************************/
+
+/*----------------------------------------*
+ * Root
+ *----------------------------------------*/
+
+:root {
+    --cs-color: #22223b;
+    --cs-background: #ffffff;
+    --cs-date-color: #22223b;
+    --cs-time-color: #22223b;
+    --cs-size-base: 1rem;
+    --cs-size-magnification: 1;
+    --cs-border-width: 1px;
+    --cs-border-color: #22223b;
+}
+
+/*----------------------------------------*
+ * Styles
+ *----------------------------------------*/
+
+.clock-simple {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    row-gap: 0.5rem;
+    color: var(--cs-color);
+    background: var(--cs-background);
+    line-height: 1;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    & .date {
+        color: var(--cs-date-color);
+        font-size: calc(var(--cs-size-base) * var(--cs-size-magnification) * 1.5);
+        margin-bottom: 0;
+
+        & .day-of-week {
+            font-size: calc(var(--cs-size-base) * var(--cs-size-magnification));
+            padding-left: calc(var(--cs-size-base) * var(--cs-size-magnification) * 0.3);
+        }
+    }
+
+    & .time {
+        color: var(--cs-time-color);
+        font-size: calc(var(--cs-size-base) * var(--cs-size-magnification) * 2);
+        font-weight: bold;
+        margin-bottom: 0;
+        letter-spacing: 0.1rem;
+    }
+
+    &.clock-border {
+        border: var(--cs-border-width) solid var(--cs-border-color);
+        border-radius: 0.5rem;
+    }
+
+    &.clock-wrap {
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-gap: 0.5rem;
+    }
+
+    &.clock-inline {
+        display: inline-flex;
+        margin: 0;
+        padding: 0.5rem 1rem;
+    }
+
+    &.clock-xs {
+        --cs-size-magnification: 0.67;
+    }
+
+    &.clock-sm {
+        --cs-size-magnification: 0.83;
+    }
+
+    &.clock-lg {
+        --cs-size-magnification: 1.17;
+    }
+
+    &.clock-xl {
+        --cs-size-magnification: 1.33;
+    }
+}

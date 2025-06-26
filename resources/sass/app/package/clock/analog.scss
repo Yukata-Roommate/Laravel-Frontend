@@ -1,0 +1,165 @@
+/*****************************************
+ * Package Clock
+ *
+ * Analog
+ *****************************************/
+
+/*----------------------------------------*
+ * Root
+ *----------------------------------------*/
+
+:root {
+    --ca-size-base: 1rem;
+    --ca-size-magnification: 25;
+    --ca-color: #000;
+    --ca-background: #fff;
+    --ca-border-width: 3px;
+    --ca-border-color: #000;
+    --ca-face-color: #fff;
+    --ca-face-scale-color: #000;
+    --ca-face-number-color: #000;
+    --ca-hand-second-color: #f00;
+    --ca-hand-minute-color: #000;
+    --ca-hand-hour-color: #000;
+    --ca-date-color: #000;
+}
+
+/*----------------------------------------*
+ * Extends
+ *----------------------------------------*/
+
+%clock-hand {
+    position: absolute;
+    transform-origin: bottom;
+    transition: transform 0.0s;
+    border-radius: 50%;
+}
+
+/*----------------------------------------*
+ * Styles
+ *----------------------------------------*/
+
+.clock-analog {
+    position: relative;
+    color: var(--ca-color);
+    background: var(--ca-background);
+    width: calc(var(--ca-size-base) * var(--ca-size-magnification));
+    height: calc(var(--ca-size-base) * var(--ca-size-magnification));
+    border: var(--ca-border-width) solid var(--ca-border-color);
+    border-radius: 50%;
+
+    & .face {
+        position: absolute;
+        color: var(--ca-face-color);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & .scale {
+            position: absolute;
+            width: 1px;
+            height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.03);
+            background: var(--ca-face-scale-color);
+            transform: rotate(calc(6deg * var(--ca-face-scale))) translateY(calc(var(--ca-size-base) * var(--ca-size-magnification) * -0.5 + var(--ca-size-base) * var(--ca-size-magnification) * 0.015));
+
+            &.large {
+                width: 2px;
+                height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.05);
+                transform: rotate(calc(30deg * var(--ca-face-scale))) translateY(calc(var(--ca-size-base) * var(--ca-size-magnification) * -0.5 + var(--ca-size-base) * var(--ca-size-magnification) * 0.025));
+            }
+        }
+
+        & .number-area {
+            position: absolute;
+            font-size: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.08);
+            width: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.08);
+            height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.08);
+            text-align: center;
+            transform: rotate(calc(30deg * var(--ca-face-number))) translateY(calc(var(--ca-size-base) * var(--ca-size-magnification) * -0.5 * 0.78 - var(--ca-face-number) * (var(--ca-size-base) * var(--ca-size-magnification) * 0.08) * 0.01));
+            transform-origin: center;
+
+            & .number {
+                color: var(--ca-face-number-color);
+                font-size: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.08);
+                width: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.08);
+                height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.08);
+                transform: rotate(calc(-30deg * var(--ca-face-number)));
+                transform-origin: 50% 75%;
+            }
+        }
+    }
+
+    & .date {
+        position: absolute;
+        top: 30%;
+        width: calc(var(--ca-size-base) * var(--ca-size-magnification));
+        font-size: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.07);
+        text-align: center;
+        margin: 0;
+
+        & .day-of-week {
+            font-size: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.06);
+            padding-left: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.01);
+        }
+    }
+
+    & .hour {
+        @extend %clock-hand;
+        background: var(--ca-hand-hour-color);
+        width: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.04);
+        height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.32);
+        top: calc(50% - calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.32));
+        left: calc(50% - (var(--ca-size-base) * var(--ca-size-magnification) * 0.04 / 2));
+        transform: rotate(calc(1deg * var(--ca-hour-degree)));
+    }
+
+    & .minute {
+        @extend %clock-hand;
+        background: var(--ca-hand-minute-color);
+        width: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.02);
+        height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.37);
+        top: calc(50% - calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.37));
+        left: calc(50% - (var(--ca-size-base) * var(--ca-size-magnification) * 0.02 / 2));
+        transform: rotate(calc(1deg * var(--ca-minute-degree)));
+    }
+
+    & .second {
+        @extend %clock-hand;
+        background: var(--ca-hand-second-color);
+        width: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.01);
+        height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.42);
+        top: calc(50% - calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.42));
+        left: calc(50% - (var(--ca-size-base) * var(--ca-size-magnification) * 0.01 / 2));
+        transform: rotate(calc(1deg * var(--ca-second-degree)));
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            background: var(--ca-hand-second-color);
+            width: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.06);
+            height: calc(var(--ca-size-base) * var(--ca-size-magnification) * 0.06);
+            border-radius: 50%;
+            bottom: calc(var(--ca-size-base) * var(--ca-size-magnification) * -0.06 / 2);
+            left: calc(var(--ca-size-base) * var(--ca-size-magnification) * -0.06 / 2);
+        }
+    }
+
+    &.clock-xs {
+        --ca-size-magnification: 15;
+    }
+
+    &.clock-sm {
+        --ca-size-magnification: 20;
+    }
+
+    &.clock-lg {
+        --ca-size-magnification: 30;
+    }
+
+    &.clock-xl {
+        --ca-size-magnification: 35;
+    }
+}
